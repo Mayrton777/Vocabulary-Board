@@ -1,0 +1,6 @@
+@Vocabulary.Api_HostAddress = http://localhost:5204
+
+GET {{Vocabulary.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,17 @@
+# Pastas de compilação do C#
+[Bb]in/
+[Oo]bj/
+
+# Arquivos de usuário e cache da IDE
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+# Arquivos de log locais
+*.log
+
+# Resultados de Testes
+TestResults/
+[Tt]est[Rr]esult*/

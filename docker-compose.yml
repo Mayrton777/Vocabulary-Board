@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: vocabulary_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: R1d2@1w3
+      POSTGRES_DB: vocabularydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Garante que os dados não sumam
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: src/Vocabulary.Api/Dockerfile
+    container_name: vocabulary_api
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Database=vocabularydb;Username=admin;Password=adminpassword
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db # Garante que a API só inicie depois do banco
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: vocabulary_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+volumes:
+  pgdata: # Cria o disco virtual persistente para o Postgres
